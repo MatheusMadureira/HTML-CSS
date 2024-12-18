@@ -3,47 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Input e Print</title>
+    <title>Pergunta Interativa</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f4f4f4;
+            background-color: #f0f0f0;
+            overflow: hidden;
+            position: relative;
         }
+
         .container {
             text-align: center;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        input, button {
-            padding: 10px;
-            margin: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
+
+        .question {
+            font-size: 2rem;
+            margin-bottom: 2rem;
         }
-        #output {
-            margin-top: 20px;
-            font-weight: bold;
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        button {
+            font-size: 1.2rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+        }
+
+        #nao {
+            position: relative;
         }
     </style>
+    <script>
+        function moverBotaoNao() {
+            const botaoNao = document.getElementById('nao');
+            const larguraTela = window.innerWidth;
+            const alturaTela = window.innerHeight;
+
+            const x = Math.random() * (larguraTela - botaoNao.offsetWidth);
+            const y = Math.random() * (alturaTela - botaoNao.offsetHeight);
+
+            botaoNao.style.position = 'absolute';
+            botaoNao.style.left = `${x}px`;
+            botaoNao.style.top = `${y}px`;
+        }
+
+        function abrirNovaPagina() {
+            document.body.style.cssText = `
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background-color: #ffefd5;`;
+
+            document.body.innerHTML = `
+                <h1 style="font-size: 3rem; color: #ff4500; font-family: Arial, sans-serif;">Te Adoro</h1>`;
+        }
+    </script>
 </head>
 <body>
     <div class="container">
-        <h1>Vou adivinhar seu nome:</h1>
-        <input type="text" id="userInput" placeholder="Escreva seu nome aqui">
-        <button onclick="printInput()">Enviar</button>
-        <p id="output"></p>
+        <div class="question">Oi Juju, você aceita morar comigo?</div>
+        <div class="buttons">
+            <button id="sim" onclick="abrirNovaPagina()">Sim</button>
+            <button id="nao" onclick="moverBotaoNao()">Não</button>
+        </div>
     </div>
-    <script>
-        function printInput() {
-            var input = document.getElementById('userInput').value;
-            document.getElementById('output').innerText = 'Hello World';
-        }
-    </script>
 </body>
 </html>
